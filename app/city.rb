@@ -2,6 +2,7 @@ require 'rest-client'
 require 'json'
 require 'pry'
 class City
+  attr_accessor :city_name, :country, :latitude :longitude
   #chooses 4 random cities
   def self.get_cities
   #make the web request

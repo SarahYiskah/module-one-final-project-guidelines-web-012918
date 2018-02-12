@@ -5,8 +5,8 @@ gem "sinatra-activerecord"
 gem "sqlite3"
 gem "pry"
 gem "require_all"
-gem "RestClient"
+gem "rest-client"
 gem "json"
 gem 'sinatra'
-   gem 'activerecord', '4.2.5'
+   gem 'activerecord'
    gem 'sinatra-activerecord'

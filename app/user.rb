@@ -1,8 +1,10 @@
 require 'pry'
 require 'rest-client'
 require 'json'
-class User
-  attr_accessor :name
+class User < ActiveRecord::Base
+  has_many :rounds
+  has_many :games, through: :rounds
+  
   ALL = []
   def initialize(name)
     @name = name
@@ -18,7 +20,7 @@ class User
     location = RestClient.get("http://ip-api.com/json/#{ip_address}")
     JSON.parse(location)
   end
-  
+
   def country
     location = get_location
     location["country"]

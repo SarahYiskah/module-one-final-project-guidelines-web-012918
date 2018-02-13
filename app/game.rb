@@ -1,7 +1,9 @@
 require 'require_all'
 
-class Game
-  attr_accessor :score
+class Game < ActiveRecord::Base
+  has_many :rounds
+  has_many :users, through: :rounds
+  
   def initialize
     @score = 0
   end

@@ -8,5 +8,5 @@ gem "require_all"
 gem "rest-client"
 gem "json"
 gem 'sinatra'
-   gem 'activerecord'
-   gem 'sinatra-activerecord'
+    gem 'activerecord'
+    gem 'sinatra-activerecord'

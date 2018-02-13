@@ -9,3 +9,6 @@ gem "json"
 gem 'sinatra'
 gem 'activerecord'
 gem 'sinatra-activerecord'
+gem 'haversine'
+gem 'unirest'
+gem 'byebug'

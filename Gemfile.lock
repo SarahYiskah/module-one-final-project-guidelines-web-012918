@@ -12,11 +12,15 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
+    byebug (10.0.0)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
+    haversine (0.3.2)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.9.4)
@@ -32,6 +36,7 @@ GEM
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
+    public_suffix (3.0.2)
     rack (2.0.4)
     rack-protection (2.0.0)
       rack
@@ -56,12 +61,18 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
+    unirest (1.0.8)
+      addressable
+      json
+      rest-client
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   activerecord
+  byebug
+  haversine
   json
   pry
   require_all
@@ -69,6 +80,7 @@ DEPENDENCIES
   sinatra
   sinatra-activerecord
   sqlite3
+  unirest
 
 BUNDLED WITH
    1.16.1

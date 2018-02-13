@@ -1,7 +1,6 @@
 require 'active_record'
 require_relative '../config/environment.rb'
 # require_relative 'user.rb'
-require_relative 'geodistance.rb'
 require_relative 'city.rb'
 
 class Game < ActiveRecord::Base

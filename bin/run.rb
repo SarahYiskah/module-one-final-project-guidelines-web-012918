@@ -10,7 +10,10 @@ input = gets.chomp
 user = User.new(input)
 puts "You are playing from #{user.city}!"
 
-cities = City.city_distances
+cities = City.city_distances(user)
+cities.each do |city|
+  puts "#{city.city} + #{city.distance}"
+end
 difficulty = 0
 
 10.times do

@@ -13,10 +13,10 @@
 ActiveRecord::Schema.define(version: 20180213143709) do
 
   create_table "cities", force: :cascade do |t|
+    t.string "city"
     t.string "country"
-    t.string "name"
-    t.float "lat"
-    t.float "lng"
+    t.float "latitude"
+    t.float "longitude"
     t.float "distance"
   end
 

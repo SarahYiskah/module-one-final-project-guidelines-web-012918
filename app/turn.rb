@@ -32,7 +32,7 @@ class Turn
     puts "Which city are you closest to?"
     counter = 1
     cities.each do |city|
-      puts "#{counter}. #{city.name}"
+      puts "#{counter}. #{city.city}"
       counter +=1
     end
   end
@@ -43,7 +43,7 @@ class Turn
 
   def check_answer(answer, cities)
     sorted_cities = cities.sort_by{|city| city.distance}
-    correct_answer = sorted_cities[0].name
+    correct_answer = sorted_cities[0].city
     if answer.downcase == I18n.transliterate(correct_answer.downcase) || answer.to_i == cities.index(sorted_cities[0]) + 1
       puts GOOD.sample
       return 1

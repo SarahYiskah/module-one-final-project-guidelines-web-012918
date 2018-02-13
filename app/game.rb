@@ -1,20 +1,17 @@
-require 'require_all'
+require 'active_record'
+require_relative '../config/environment.rb'
+# require_relative 'user.rb'
+require_relative 'geodistance.rb'
+require_relative 'city.rb'
 
 class Game < ActiveRecord::Base
   has_many :rounds
   has_many :users, through: :rounds
-  
-  def initialize
-    @score = 0
+
+  attr_accessor :score
+
+  def initialize(score = 0)
+    @score = score
   end
-  #welcome user and give instructions
-  def start_game
-    puts "Hello. Welcome to TweenGame. Please enter your name:"
-    input = gets.chomp
-    user = User.new(input)
-    city = user.city
-    longitude = user.longitude
-    latitude = user.latitude
-    puts "You are playing from #{city}"
-    Turn.new
+
 end

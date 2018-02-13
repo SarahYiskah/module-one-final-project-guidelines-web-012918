@@ -1,13 +1,18 @@
 require 'pry'
 require 'rest-client'
 require 'json'
+require 'active_record'
+require_relative '../config/environment.rb'
+
 class User < ActiveRecord::Base
   has_many :rounds
   has_many :games, through: :rounds
-  
+
+  attr_accessor :name, :location
   ALL = []
   def initialize(name)
     @name = name
+    @location = get_location
     ALL << self
   end
   def self.all
@@ -22,23 +27,18 @@ class User < ActiveRecord::Base
   end
 
   def country
-    location = get_location
-    location["country"]
+    @location["country"]
+  end
+
   def city
-    location = get_location
-    location["city"]
+    @location["city"]
   end
+
   def latitude
-    location = get_location
-    location["lat"]
+    @location["lat"]
   end
+
   def longitude
-    location = get_location
-    location["lon"]
+    @location["lon"]
   end
 end
-
-user = User.new("sarah")
-puts user.city
-puts user.latitude
-puts user.longitude

@@ -1,31 +1,48 @@
 require 'require_all'
+require 'active_record'
 
 class Turn
 
-  correct_answer_number == 0
-  def turn_by_country
-    cities = City.get_cities_by_country.sample(4)
-    puts "Which city are you closest to:"
-    counter = 1
-    cities.each do |city|
-      puts "#{counter}. #{city}"
-      counter +=1
-    end
-    answer = gets.chomp.downcase
-  #if answer == correct_answer or correct_answer_number
-  #prints correct
-  #update score >> correct_answer_number +=1
-  #call another turn as long as turn_count < 11
-  #final score is correct_score/10
+  attr_reader :difficulty
+
+  def initialize(difficulty)
+    @difficulty = difficulty
   end
 
-#calculates distance of each city to location of user
-#increase difficulty
-#first amount will be same country
-#shows user the random cities and get input of which city user thinks is closest
-#checks to see if input is correct.
-#get a score
+  def get_cities(cities)
+    if @difficulty < 2
+      cities[1..10].sample(4).shuffle!
+    elsif @difficulty < 4
+      cities[1..50].sample(4).shuffle!
+    elsif @difficulty < 6
+      cities[1..100].sample(4).shuffle!
+    elsif @difficulty < 8
+      cities[1..120].sample(4).shuffle!
+    elsif @difficulty < 10
+      cities[1..150].sample(4).shuffle!
+    end
+  end
 
+  def display_cities(cities)
+    puts "Which city are you closest to?"
+    counter = 1
+    cities.each do |city|
+      puts "#{counter}. #{city.name}"
+      counter +=1
+    end
+  end
 
+  def check_answer(cities)
+    cities.sort_by!{|city| city.distance}
+    puts cities[0].name
+    answer = gets.chomp
+    if answer == cities[0].name
+      puts "Correct!"
+      return 1
+    else
+      puts "Sorry, that's incorrect."
+      return 0
+    end
+  end
 
 end

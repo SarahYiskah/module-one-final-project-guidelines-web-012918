@@ -1,3 +1,6 @@
+require 'require_all'
+require_relative '../config/environment.rb'
+
 class Geodistance
   include Math
   attr_reader :from, :to, :lat1, :lon1, :lat2, :lon2
@@ -14,10 +17,10 @@ class Geodistance
       raise NotImplementedError, 'The type you have requested is not implemented, try "cosines" or "approximation", or without params for "haversine"'
     end
   end
-  private
+
   def haversine
-    d_lat = (from[:latitude] - to[:latitude])/(180 * Math::PI)
-    d_lon = (from[:longitude] - to[:longitude])/(180 * Math::PI)
+    d_lat = (from[:latitude] - to[:lat])/(180 * Math::PI)
+    d_lon = (from[:longitude] - to[:lng])/(180 * Math::PI)
     a = sin(d_lat / 2) * sin(d_lat / 2) + sin(d_lon / 2) *
       sin(d_lon / 2) * cos(lat1) * cos(lat2)
     c = 2 * atan2(sqrt(a), sqrt(1-a))
@@ -35,8 +38,8 @@ class Geodistance
   end
   def set_variables
     @lat1 = (from[:latitude])/(180 * Math::PI)
-    @lat2 = (to[:latitude])/(180 * Math::PI)
+    @lat2 = (to[:lat])/(180 * Math::PI)
     @lon1 = (from[:longitude])/(180 * Math::PI)
-    @lon2 = (to[:longitude])/(180 * Math::PI)
+    @lon2 = (to[:lng])/(180 * Math::PI)
   end
 end

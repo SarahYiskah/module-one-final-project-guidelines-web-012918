@@ -1,22 +1,15 @@
-require 'rest-client'
-require 'json'
-require 'pry'
+require 'active_record'
+require_relative '../config/environment.rb'
 
-class City
-  attr_accessor :city_name, :country, :latitude :longitude
-  #chooses 4 random cities
-  def self.get_cities
-  #make the web request
-    all_cities = RestClient.get('https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json')
-    cities_array = JSON.parse(all_cities)
-    cities_array.sample(150)
+class City < ActiveRecord::Base
+  def self.city_distances
+    City.all.each do |city|
+      from = {longitude: 40.00, latitude: -74.00}
+      to = {lng: city.lng, lat: city.lat}
+      dist = Geodistance.new(from, to).haversine
+      city.update_attribute(:distance, dist)
+    end
+    cities = City.order('distance')
+    cities
   end
-
-  def self.get_cities_by_country(user)
-  #make the web request
-    all_cities = RestClient.get('https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json')
-    cities_array = JSON.parse(all_cities)
-    cities_array.sample(150)
-  end
-
 end

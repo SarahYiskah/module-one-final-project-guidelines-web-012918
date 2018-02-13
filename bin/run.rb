@@ -8,7 +8,7 @@ game = Game.new
 puts "Hello. Welcome to TweenGame. Please enter your name:"
 input = gets.chomp
 user = User.new(input)
-puts "You are playing from #{user.city}!"
+puts "Hi, #{input.capitalize}! You are playing from #{user.city}!"
 
 cities = City.city_distances(user)
 cities.each do |city|
@@ -20,8 +20,21 @@ difficulty = 0
   turn = Turn.new(difficulty)
   sample_cities = turn.get_cities(cities)
   turn.display_cities(sample_cities)
-  game.score += turn.check_answer(sample_cities)
-  difficulty +=1
+  answer = turn.get_answer
+  if answer == "exit" || answer == "quit"
+    break
+  else
+    game.score += turn.check_answer(answer, sample_cities)
+    difficulty +=1
+  end
 end
 
-puts game.score
+if game.score <= 4
+  puts "You scored #{game.score}/10 correct answers. Better luck next time!"
+elsif game.score <= 7
+  puts "You scored #{game.score}/10 correct answers. Great Job!"
+elsif game.score <= 9
+  puts "You scored #{game.score}/10 correct answers. Wow! Amazing job!"
+elsif game.score == 10
+  puts "You scored #{game.score}/10 correct answers! That's a perfect score!"
+end

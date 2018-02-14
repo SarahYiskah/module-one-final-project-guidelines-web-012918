@@ -1,40 +1,25 @@
 require_relative '../config/environment'
 require 'require_all'
 require_all 'app'
+require 'pry'
 
-game = Game.new
 
-# welcome user and give instructions
-puts "Hello. Welcome to TweenGame. Please enter your name:"
-input = gets.chomp
-user = User.new(input)
-puts "Hi, #{input.capitalize}! You are playing from #{user.city}!"
 
-cities = City.city_distances(user)
-# cities.each do |city|
-#   puts "#{city.city} + #{city.distance}"
-# end
-difficulty = 0
-
-10.times do
-  turn = Turn.new(difficulty)
-  sample_cities = turn.get_cities(cities)
-  turn.display_cities(sample_cities)
-  answer = turn.get_answer
-  if answer == "exit" || answer == "quit"
+# User.delete_all
+# Game.delete_all
+# Round.delete_all
+response = 0
+puts "Hello. Welcome to TweenGame!"
+while response != 3
+  puts "Enter 1 to play a new game, 2 to see the scoreboard or 3 to Exit."
+  response = gets.chomp
+  if response.to_i == 2
+    Game.scoreboard
+  elsif response.to_i == 1
+    Round.play
+  elsif response.to_i == 3
     break
   else
-    game.score += turn.check_answer(answer, sample_cities)
-    difficulty +=1
+    puts "Invalid Input"
   end
-end
-
-if game.score <= 4
-  puts "You scored #{game.score}/10 correct answers. Better luck next time!"
-elsif game.score <= 7
-  puts "You scored #{game.score}/10 correct answers. Great Job!"
-elsif game.score <= 9
-  puts "You scored #{game.score}/10 correct answers. Wow! Amazing job!"
-elsif game.score == 10
-  puts "You scored #{game.score}/10 correct answers! That's a perfect score!"
 end

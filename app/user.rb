@@ -8,22 +8,23 @@ class User < ActiveRecord::Base
   has_many :rounds
   has_many :games, through: :rounds
 
-  attr_accessor :name, :location
-  ALL = []
-  def initialize(name)
-    @name = name
-    @location = get_location
-    ALL << self
-  end
-  def self.all
-    ALL
-  end
-
+  attr_accessor :location
+  # ALL = []
+  @location = {}
+  # def initialize(name)
+  #   @name = name
+  #   @location = get_location
+  #   ALL << self
+  # end
+  # def self.all
+  #   ALL
+  # end
+  #
   #gets location of user
   def get_location
     ip_address = `curl ifconfig.me`.chomp
     location = RestClient.get("http://ip-api.com/json/#{ip_address}")
-    JSON.parse(location)
+    @location = JSON.parse(location)
   end
 
   def country

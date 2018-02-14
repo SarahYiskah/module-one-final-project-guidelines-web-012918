@@ -11,18 +11,9 @@ class User < ActiveRecord::Base
   attr_accessor :location
   # ALL = []
   @location = {}
-  # def initialize(name)
-  #   @name = name
-  #   @location = get_location
-  #   ALL << self
-  # end
-  # def self.all
-  #   ALL
-  # end
-  #
-  #gets location of user
+  
   def get_location
-    ip_address = `curl ifconfig.me`.chomp
+    ip_address = `curl -s ifconfig.me`.chomp
     location = RestClient.get("http://ip-api.com/json/#{ip_address}")
     @location = JSON.parse(location)
   end

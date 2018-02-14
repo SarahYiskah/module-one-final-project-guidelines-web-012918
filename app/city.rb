@@ -3,6 +3,7 @@ require_relative '../config/environment.rb'
 require 'haversine'
 
 class City < ActiveRecord::Base
+
   def self.city_distances(user)
     City.all.each do |city|
       from_lat = user.latitude

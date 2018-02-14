@@ -14,6 +14,8 @@ class Turn
     @difficulty = difficulty
   end
 
+  
+
   def get_cities(cities)
     if @difficulty < 2
       cities[1..10].sample(4).shuffle!
@@ -29,10 +31,10 @@ class Turn
   end
 
   def display_cities(cities)
-    puts "Which city are you closest to?"
+    puts "Which city are you closest to?".colorize(mode: :underline, color: :magenta)
     counter = 1
     cities.each do |city|
-      puts "#{counter}. #{city.city}"
+      puts "#{counter}. #{city.city}".colorize(color: :yellow)
       counter +=1
     end
   end
@@ -45,10 +47,10 @@ class Turn
     sorted_cities = cities.sort_by{|city| city.distance}
     correct_answer = sorted_cities[0].city
     if answer.downcase == I18n.transliterate(correct_answer.downcase) || answer.to_i == cities.index(sorted_cities[0]) + 1
-      puts GOOD.sample
+      puts GOOD.sample.colorize(color: :green) + " #{correct_answer} is #{sorted_cities[0].distance.round} miles away.".colorize(color: :green)
       return 1
     else
-      puts BAD.sample + " The correct answer was #{correct_answer}."
+      puts BAD.sample.colorize(color: :red) + " The correct answer was #{correct_answer}, which is #{sorted_cities[0].distance.round} miles away.".colorize(color: :red)
       return 0
     end
   end

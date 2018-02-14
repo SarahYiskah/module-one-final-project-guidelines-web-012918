@@ -10,7 +10,7 @@ class Game < ActiveRecord::Base
 
 
   def self.scoreboard
-    puts "High Scores:"
+    puts "High Scores:".colorize(color: :magenta, mode: :blink)
     table_data = []
     Game.all.each do |game|
       # binding.pry

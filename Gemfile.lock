@@ -17,6 +17,7 @@ GEM
     arel (8.0.0)
     byebug (10.0.0)
     coderay (1.1.2)
+    colorize (0.8.1)
     concurrent-ruby (1.0.5)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
@@ -73,6 +74,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   byebug
+  colorize
   formatador
   haversine
   json

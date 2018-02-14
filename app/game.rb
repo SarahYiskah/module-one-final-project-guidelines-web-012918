@@ -44,7 +44,7 @@ class Game < ActiveRecord::Base
       puts "You scored #{game_score}/10 correct answers! That's a perfect score!".colorize(color: :green)
     end
     Round.scoreboard
-
+    pid = fork{ exec 'afplay', "media/03 Intro Music.mp3"}
   end
 
 end

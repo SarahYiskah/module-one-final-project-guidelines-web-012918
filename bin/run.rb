@@ -43,6 +43,8 @@ puts "
 
 
                                    ".colorize(color: :green)
+
+pid = fork{ exec 'afplay', "media/03 Intro Music.mp3"}
 puts "Hello. Welcome to TweenGame!".colorize(color: :yellow, mode: :blink)
 while response != 3
   puts "Enter 1 to play a new game, 2 to see the scoreboard or 3 to Exit.".colorize(color: :green)

@@ -31,9 +31,11 @@ class Turn
     sorted_cities = cities.sort_by{|city| city.distance}
     correct_answer = sorted_cities[0].city
     if answer.downcase == I18n.transliterate(correct_answer.downcase) || answer.to_i == cities.index(sorted_cities[0]) + 1
+      pid = fork{ exec 'afplay', "media/01 Winning Sound.mp3"}
       puts GOOD.sample.colorize(color: :green) + " #{correct_answer} is #{sorted_cities[0].distance.round} miles away.".colorize(color: :green)
       return 1
     else
+      pid = fork{ exec 'afplay', "media/02 Losing Sound.mp3"}
       puts BAD.sample.colorize(color: :red) + " The correct answer was #{correct_answer}, which is #{sorted_cities[0].distance.round} miles away.".colorize(color: :red)
       return 0
     end

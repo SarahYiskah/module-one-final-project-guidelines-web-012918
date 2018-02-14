@@ -1,7 +1,7 @@
 require 'require_all'
 require 'active_record'
 require 'pry'
-require "i18n"
+require 'i18n'
 
 class Turn
 
@@ -12,22 +12,6 @@ class Turn
 
   def initialize(difficulty)
     @difficulty = difficulty
-  end
-
-  
-
-  def get_cities(cities)
-    if @difficulty < 2
-      cities[1..10].sample(4).shuffle!
-    elsif @difficulty < 4
-      cities[1..50].sample(4).shuffle!
-    elsif @difficulty < 6
-      cities[1..100].sample(4).shuffle!
-    elsif @difficulty < 8
-      cities[1..120].sample(4).shuffle!
-    elsif @difficulty < 10
-      cities[1..150].sample(4).shuffle!
-    end
   end
 
   def display_cities(cities)

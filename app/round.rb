@@ -4,44 +4,15 @@ class Round < ActiveRecord::Base
   belongs_to :game
   belongs_to :user
 
-  def self.play
-    game_score = 0
-    puts "Please enter your name:".colorize(color: :green)
-    input = gets.chomp
-    user = User.create(name: input.capitalize)
-    user.get_location
-    puts "Hi, #{input.capitalize}! You are playing from #{user.city}!".colorize(color: :yellow)
-
-    cities = City.city_distances(user)
-    difficulty = 0
-
-    10.times do
-      turn = Turn.new(difficulty)
-      sample_cities = turn.get_cities(cities)
-      turn.display_cities(sample_cities)
-      answer = turn.get_answer
-      if answer == "exit" || answer == "quit"
-        break
-      else
-        game_score += turn.check_answer(answer, sample_cities)
-        difficulty +=1
-      end
+  def self.scoreboard
+    puts "High Scores:".colorize(color: :magenta, mode: :blink)
+    table_data = []
+    Round.all.each do |round|
+      table_data << {"User" => round.user.name, "Score" => round.game.score}
     end
-
-    game = Game.create(score: game_score)
-    round = Round.create(user: user, game: game)
-    if game_score < 7
-      puts "Game over!".colorize(color: :magenta, mode: :blink)
-      puts "You scored #{game_score}/10 correct answers!".colorize(color: :green)
-    elsif game_score <= 9
-      puts "Game over!".colorize(color: :magenta, mode: :blink)
-      puts "You scored #{game_score}/10 correct answers. Wow! Amazing job!".colorize(color: :green)
-    elsif game_score == 10
-      puts "Game over!".colorize(color: :magenta, mode: :blink)
-      puts "You scored #{game_score}/10 correct answers! That's a perfect score!".colorize(color: :green)
-    end
-    Game.scoreboard
-
+    table_data.sort_by!{|k| k["Score"]}.reverse!
+    table_data = table_data.first(5)
+    Formatador.display_compact_table(table_data)
   end
 
 end

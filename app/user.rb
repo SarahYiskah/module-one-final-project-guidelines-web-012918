@@ -9,9 +9,9 @@ class User < ActiveRecord::Base
   has_many :games, through: :rounds
 
   attr_accessor :location
-  # ALL = []
+
   @location = {}
-  
+
   def get_location
     ip_address = `curl -s ifconfig.me`.chomp
     location = RestClient.get("http://ip-api.com/json/#{ip_address}")

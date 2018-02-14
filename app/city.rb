@@ -19,15 +19,15 @@ class City < ActiveRecord::Base
 
   def self.get_cities(turn, cities)
     if turn.difficulty < 2
-      cities[1..10].sample(4).shuffle!
+      cities[1..10].shuffle[0..3]
     elsif turn.difficulty < 4
-      cities[1..50].sample(4).shuffle!
+      cities[1..50].shuffle[0..3]
     elsif turn.difficulty < 6
-      cities[1..100].sample(4).shuffle!
+      cities[1..100].shuffle[0..3]
     elsif turn.difficulty < 8
-      cities[1..120].sample(4).shuffle!
+      cities[1..120].shuffle[0..3]
     elsif turn.difficulty < 10
-      cities[1..150].sample(4).shuffle!
+      cities[1..150].shuffle[0..3]
     end
   end
 
